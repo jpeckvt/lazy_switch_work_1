@@ -25,13 +25,10 @@ switch_list = switch_file.read().split('\n')
 
 # i guess we are also just finding switches and respective interface thats that use vlan 80?
 # this seems unrelated that is OKAY we just need the list for it outside the main loop :)
-
 vlan_80_switches = []
 
 # the main loop that does all the stuff
-
-for line in switch_list:
-    
+for line in switch_list:  
     current_switch = line
     
     if dry_run:
@@ -45,8 +42,7 @@ for line in switch_list:
     # you might need to add some ssh options for encryption or hashes that the switches need if they are old
     ssh_context = 'ssh -F /dev/null -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ' + username +'@' + current_switch
     
-    switch_cli = pexpect.spawnu(ssh_context)
-    
+    switch_cli = pexpect.spawnu(ssh_context)  
     print('Attemping to connect to ' + line)
     
     # THIS BLOCK IS TO JUST GET US INTO ENABLE MODE...
