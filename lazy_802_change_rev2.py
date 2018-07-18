@@ -101,9 +101,19 @@ for line in switch_list:
         if 'Status' in line:
             continue
         
-        # is this a trunk? then skip.
+      # is this a trunk? then skip.
         if 'trunk' in line:
             print('FOUND TRUNK, SKIPPING THE FOLLOWING INTERFACE.')
+            print(line)
+            continue
+        
+        if '1/0/22' in line:
+            print('FOUND 1/0/22, SKIPPING THE FOLLOWING INTERFACE.')
+            print(line)
+            continue
+
+        if '1/0/23' in line:
+            print('FOUND 1/0/23, SKIPPING THE FOLLOWING INTERFACE.')
             print(line)
             continue
         
@@ -115,13 +125,7 @@ for line in switch_list:
             print('FOUND PORT IN VLAN 30, SKIPPING THE FOLLOWING INTERFACE.')
             print(line)
             continue
-        
-        if line_list[2] == '80':
-            print('FOUND PORT IN VLAN 80, SKIPPING THE FOLLOWING INTERFACE, BUT RECORDING FOR LATER OUTPUT')
-            print(line)
-            vlan_80_switches.append([current_switch, line_list[0]])
-            continue
-        
+                
         # if it doesn't fit the skip criteria above, its gonna get the 802.1x changes. record int and vlan pair
         else:
             interfaces_to_change.append([list[0], line_list[2])
